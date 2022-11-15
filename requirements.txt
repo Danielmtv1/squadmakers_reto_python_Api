@@ -1,0 +1,12 @@
+Flask-Smorest
+sqlalchemy
+Flask-SQLAlchemy
+requests
+flask-swagger-ui
+passlib
+marshmallow
+marshmallow-SQLAlchemy
+python-dotenv
+flask-migrate
+flask
+pytest
