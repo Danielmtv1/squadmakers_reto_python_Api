@@ -1,9 +1,15 @@
 swagger:
-
+for consult the swagger 
 http://127.0.0.1:5000/swagger-ui
 
+if you need a random joke use = /jokes/
+if you need Get a Chuck Norris Jokes use in /jokes/ ?choice=Chuck
+if you need Geta Dad jokes use in /jokes/ ?choice=Dad
 
+for the sum the 1 to the number use /sumOne?numer=
 
+for the mcm use = mcnNumbers?numbers= 1,2,3,4,5
+all methods use in /jokes/ GET, POST, PUT, DELETE 
 The use of sql or non-sql databases must depend on the needs and the type of data, if I am looking to make use of the ACID properties, because the security and consistency of the data is very important, but if what I am looking for is speed, I would use no SQL database
 
 this is a sentence for create table for pryect in sql

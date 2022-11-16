@@ -4,11 +4,12 @@ from flask_smorest import Blueprint, abort
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from resources.requestsApp import chuckNorrisJoke, dadJoke, RandomJokes
 from db import db
-from models.jokesmodel import JokeModel
+from models.jokesmodel import JokeModel, save_to_db, update_to_db, delete_from_db
 from schemas import JokeSchema, IdSchema
 
 
-blp = Blueprint("Jokes", "jokes", description="Radom jokes by chucknorris or dad")
+blp = Blueprint("Jokes", "jokes",
+                description="Radom jokes by chucknorris or dad")
 
 # in this module, i write the method, get, post,put and delete for http://localhost/jokes/
 
@@ -45,8 +46,7 @@ class joke(MethodView):
     def post(self, jokes):
         jokes = JokeModel(joke=RandomJokes())
         try:
-            db.session.add(jokes)
-            db.session.commit()
+            save_to_db(jokes)
         except IntegrityError:
             abort(
                 400,
@@ -69,7 +69,8 @@ class joke(MethodView):
             query = db.session.query(JokeModel)
             joke_filter = query.filter(JokeModel.id == id).first()
             joke_filter.joke = joke_filter.joke = RandomJokes()
-            db.session.commit()
+            # actualizar
+            update_to_db()
         except IntegrityError:
             abort(
                 400,
@@ -89,8 +90,7 @@ class joke(MethodView):
         id = args.get("id", default="", type=int)
         try:
             jokes = JokeModel.query.get_or_404(id)
-            db.session.delete(jokes)
-            db.session.commit()
+            delete_from_db(jokes)
         except SQLAlchemyError:
             abort(400, message="Not foud id Joke")
         return {"message": "joke deleted"}, 200
