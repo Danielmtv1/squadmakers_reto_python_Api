@@ -13,8 +13,8 @@ class IdSchema(Schema):
     joke = fields.Str(dump_only=True)
 
 
-class JokeSchemaChoice(fields.Str):
-    args = fields.Str()
+class JokeSchemaChoice(Schema):
+    choice = fields.Str()
 
 
 class JokeUpdateSchema(Schema):

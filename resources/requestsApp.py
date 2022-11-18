@@ -5,7 +5,6 @@ from math import lcm as mcm
 from functools import reduce
 import random
 
-# the function an other Requests for Apps
 
 # get joke for chucknorris api
 def chuckNorrisJoke():

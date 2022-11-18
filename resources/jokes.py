@@ -5,11 +5,9 @@ from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from resources.requestsApp import chuckNorrisJoke, dadJoke, RandomJokes
 from db import db
 from models.jokesmodel import JokeModel, save_to_db, update_to_db, delete_from_db
-from schemas import JokeSchema, IdSchema
+from schemas import JokeSchema, IdSchema, JokeSchemaChoice
 
-
-blp = Blueprint("Jokes", "jokes",
-                description="Radom jokes by chucknorris or dad")
+blp = Blueprint("Jokes", "jokes", description="Radom jokes by chucknorris or dad")
 
 # in this module, i write the method, get, post,put and delete for http://localhost/jokes/
 
@@ -17,13 +15,11 @@ blp = Blueprint("Jokes", "jokes",
 @blp.route("/jokes/")
 class joke(MethodView):
     @blp.route("/jokes/")
-    @blp.arguments(JokeSchema, location="query")
+    @blp.arguments(JokeSchemaChoice, location="query")
     @blp.response(200, JokeSchema)
-    def get(
-        self,
-    ):
+    def get(self, *args):
         args = request.args
-        path_param = args.get("choice", default="", type=int)
+        path_param = args.get("choice", default="", type=str)
         if path_param == "Dad":
             try:
                 return jsonify(dadJoke()), 201
